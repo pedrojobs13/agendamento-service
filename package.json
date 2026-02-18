@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint ."
   },
   "private": true,
   "keywords": [],
@@ -17,11 +18,13 @@
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "mysql2": "^3.17.1",
-    "uuid": "^13.0.0"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@eslint/js": "^9.19.0",
     "eslint": "^10.0.0",
     "jest": "^30.2.0",
-    "nodemon": "^3.1.11"
+    "nodemon": "^3.1.11",
+    "supertest": "^7.0.0"
   }
 }

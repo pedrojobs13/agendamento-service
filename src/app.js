@@ -7,6 +7,15 @@ app.use(express.json());
 
 app.use("/agendamentos", require("./routes/agendamentoRoutes"));
 
-app.listen(3001, () => {
-    console.log("Agendamento service rodando");
+// Health check simples para testes e monitoramento.
+app.get("/health", (req, res) => {
+    res.status(200).json({ status: "ok" });
 });
+
+if (require.main === module) {
+    app.listen(3001, () => {
+        console.log("Agendamento service rodando");
+    });
+}
+
+module.exports = app;
