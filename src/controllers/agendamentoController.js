@@ -2,8 +2,12 @@ const service = require("../services/agendamentoService");
 const model = require("../models/agendamentoModel");
 
 exports.create = async (req, res) => {
-    const agendamento = await service.create(req.body);
-    res.status(201).json(agendamento);
+    try {
+        const agendamento = await service.create(req.body);
+        res.status(201).json(agendamento);
+    } catch (err) {
+        res.status(err.status || 500).json({ error: err.message });
+    }
 };
 
 exports.getAll = async (req, res) => {
@@ -17,8 +21,12 @@ exports.getById = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
-    await model.update(req.params.id, req.body);
-    res.sendStatus(204);
+    try {
+        await service.update(req.params.id, req.body);
+        res.sendStatus(204);
+    } catch (err) {
+        res.status(err.status || 500).json({ error: err.message });
+    }
 };
 
 exports.delete = async (req, res) => {
