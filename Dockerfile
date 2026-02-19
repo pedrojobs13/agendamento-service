@@ -7,6 +7,6 @@ RUN npm install
 
 COPY . .
 
-EXPOSE ${PORT}
+EXPOSE 3001
 
 CMD ["node", "src/app.js"]
