@@ -39,18 +39,18 @@ exports.findByDateExcludingId = async (data, id) => {
     return rows[0];
 };
 
-exports.findByHour = async (startDateTime, endDateTime) => {
+exports.findByHour = async (dateTime) => {
     const [rows] = await db.execute(
-        "SELECT * FROM agendamentos WHERE data >= ? AND data <= ?",
-        [startDateTime, endDateTime]
+        "SELECT * FROM agendamentos WHERE DATE_FORMAT(data, '%Y-%m-%d %H') = DATE_FORMAT(?, '%Y-%m-%d %H') LIMIT 1",
+        [dateTime]
     );
     return rows[0];
 };
 
-exports.findByHourExcludingId = async (startDateTime, endDateTime, id) => {
+exports.findByHourExcludingId = async (dateTime, id) => {
     const [rows] = await db.execute(
-        "SELECT * FROM agendamentos WHERE data >= ? AND data <= ? AND id <> ?",
-        [startDateTime, endDateTime, id]
+        "SELECT * FROM agendamentos WHERE DATE_FORMAT(data, '%Y-%m-%d %H') = DATE_FORMAT(?, '%Y-%m-%d %H') AND id <> ? LIMIT 1",
+        [dateTime, id]
     );
     return rows[0];
 };
